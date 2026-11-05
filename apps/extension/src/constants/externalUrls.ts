@@ -44,6 +44,9 @@ export const WALLETCHAN_CLEAR_SIGNING_API = `${WALLETCHAN_API_BASE}/clearsigning
 export const WALLETCHAN_PIMLICO_PROXY_BASE = `${WALLETCHAN_API_BASE}/gas/pimlico`;
 export const WALLETCHAN_DOMAIN_REPUTATION_API = `${WALLETCHAN_API_BASE}/domain-reputation`;
 
+// Nymis — Send recipient link check (sends the sender/recipient pair; see PRIVACY_POLICY.md)
+export const NYMIS_FAST_LINKAGE_API = "https://nymis.io/api/v1/fast-linkage";
+
 // Address labels, function signatures, and verified contract source / ABI
 export const ETH_SH_LABELS_BASE = "https://eth.sh/api/labels";
 export const ethShLabelsUrl = (address: string, chainId: number) =>
@@ -156,6 +159,10 @@ export const revokeCashAddressUrl = (address: string) =>
 export const SAFE_APP_URL = "https://app.safe.global";
 export const safeAppAccountUrl = (chainId: number, address: string) =>
   `${SAFE_APP_URL}/home?safe=${chainId}:${address}`;
+
+// Nymis full address-linkage report for the Send recipient link check
+export const nymisAddressLinkageUrl = (from: string, to: string) =>
+  `https://nymis.io/address-linkage?${new URLSearchParams({ from, to }).toString()}`;
 
 // ENS history viewer and IPFS installation guide
 export const ENS_HISTORY_BASE = "https://ens.eth.sh/history";

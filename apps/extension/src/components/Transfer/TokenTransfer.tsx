@@ -21,6 +21,8 @@ import { EnsRecipientHistoryNotice } from "./EnsRecipientHistoryNotice";
 import { RecipientSection } from "./RecipientSection";
 import { RecipientSafetyNotice } from "./RecipientSafetyNotice";
 import { useSendRecipientSafety } from "./hooks/useSendRecipientSafety";
+import { RecipientLinkageNotice } from "./RecipientLinkageNotice";
+import { useRecipientLinkage } from "./hooks/useRecipientLinkage";
 import { SponsorshipEligibilityNotice, TransferNotices } from "./TransferNotices";
 import { TokenSelectionSection } from "./TokenSelectionSection";
 import { useSponsoredTransfer } from "./hooks/useSponsoredTransfer";
@@ -64,6 +66,14 @@ function TokenTransfer({
     resolvedAddress: recipientState.isValid && !recipientState.isResolving ? recipientState.resolvedAddress : null,
     fromAddress,
     chainId: catalog.selectedChainId,
+  });
+  const ownAddresses = useMemo(() => (accounts ?? []).map((account) => account.address), [accounts]);
+  const recipientLinkage = useRecipientLinkage({
+    fromAddress,
+    resolvedAddress: !preparation.isContractDeployment && recipientState.isValid && !recipientState.isResolving
+      ? recipientState.resolvedAddress : null,
+    chainId: catalog.selectedChainId,
+    ownAddresses,
   });
 
   const allChains = useMemo(() => {
@@ -276,6 +286,7 @@ function TokenTransfer({
               <EnsRecipientHistoryNotice recipient={recipientState.recipient}
                 address={recipientState.isValid && !recipientState.isResolving ? recipientState.resolvedAddress : null}
                 chainId={catalog.selectedChainId} />
+              {recipientLinkage && <RecipientLinkageNotice check={recipientLinkage} />}
             </VStack>
           )}
           <AmountSection token={catalog.selectedToken} preparation={preparation} />

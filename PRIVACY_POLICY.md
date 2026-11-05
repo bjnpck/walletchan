@@ -1,6 +1,6 @@
 # Privacy Policy
 
-**Last Updated:** July 27, 2026
+**Last Updated:** November 5, 2026
 
 WalletChan ("the Extension") is an Ethereum and EVM browser wallet for
 managing accounts, connecting to decentralized applications (dapps), and
@@ -40,8 +40,32 @@ The Extension transmits data to the following external services:
 | ------------------------------- | ---------------------------- | -------------------------------------------------- |
 | **Blockchain RPC Endpoints**    | Standard Web3 RPC calls      | Read blockchain state (balances, contract data)    |
 | **eth.sh API**                  | Blockchain addresses         | Fetch human-readable labels for contract addresses |
+| **Nymis API** (`nymis.io`)      | Sending address, recipient address, network ID | Warn on Send if the two wallets show on-chain links (Recipient link check; on by default, can be turned off) |
 | **Google Favicons**             | Website domains              | Display website icons in the UI                    |
 | **Bankr API** (`api.bankr.bot`) | Transaction details, API key | Execute or sign actions for an added Bankr account |
+
+### Recipient link check (Send)
+
+When you enter a valid, fully resolved recipient on Ethereum, Base, or
+Arbitrum, WalletChan automatically sends your **sending address**, the
+**recipient's address**, and the selected **network ID** to Nymis
+(`https://nymis.io/api/v1/fast-linkage`) so it can tell you whether the two
+wallets show on-chain links before you send. This is on by default so users who
+are unaware of address linkage are still warned.
+
+- Nothing is sent while the recipient is still being typed, unresolved, or
+  invalid, or when the recipient is one of your own accounts.
+- The request carries no cookies, API key, or referrer, and no amounts,
+  balances, or token details. Sending is never delayed or blocked by the check.
+- WalletChan does not store, log, or add analytics for these pairs. Results are
+  kept in memory for the current popup session only.
+- Nymis receives the addresses and your IP address as any web server does. Its
+  handling is governed by Nymis' own policy.
+- If you select **Explore full linkage on Nymis** in a warning, your browser
+  opens `nymis.io` with both addresses in the page URL. Nothing is opened unless
+  you select it.
+- Turn it off at any time in **Settings → Security → Recipient link check**, or
+  with **Turn off** in the Send notice. When off, no request is made.
 
 ---
 

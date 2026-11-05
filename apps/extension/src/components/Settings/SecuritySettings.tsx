@@ -1,5 +1,6 @@
 import { Box, Text, VStack } from "@chakra-ui/react";
 import { AppHeader, AppScreen, ListSurface, ScreenBody } from "@/components/ui";
+import { RecipientLinkageToggle } from "./RecipientLinkageToggle";
 import { SettingsRowListProvider } from "./SettingsRow";
 import { LEAF_ENTRIES, renderLeafRow, type RowContext } from "./settingsRegistry";
 
@@ -17,13 +18,14 @@ function SecuritySettings({ onBack, ctx }: Props) {
         <ScreenBody pb={6}>
           <VStack align="stretch" spacing={4}>
             <Text fontSize="sm" color="fg.secondary">
-              Password, biometric unlock, agent access, and automatic locking.
+              Password, biometric unlock, agent access, automatic locking, and the recipient link check.
             </Text>
             <ListSurface aria-label="Security settings">
               <SettingsRowListProvider>
                 {entries.map((entry) => renderLeafRow(entry.id, ctx))}
               </SettingsRowListProvider>
             </ListSurface>
+            <RecipientLinkageToggle />
           </VStack>
         </ScreenBody>
       </AppScreen>

@@ -10,7 +10,9 @@ To regenerate the `[Unreleased]` section from git diffs, invoke the `/changelog`
 
 ## [Unreleased]
 
-_Nothing yet._
+### Added
+
+- Automatic recipient link check on Send (Ethereum, Base, Arbitrum): once a valid recipient is resolved, WalletChan asks Nymis whether the wallets show on-chain links and shows a compact, non-blocking notice. Sends the two addresses to Nymis; on by default, with a switch in Settings → Security and in the notice. See the privacy policy.
 
 ## [4.2.0] - 2026-10-10
 

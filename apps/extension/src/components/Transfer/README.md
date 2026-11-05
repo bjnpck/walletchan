@@ -51,8 +51,18 @@ existing direct and lazy imports retain the same default-export contract.
   `AccountAvatar` and the full picker's Safe mark priority; contact suggestions
   retain the shared contact avatar and blockie fallback.
 
+- `RecipientLinkageNotice.tsx` renders the automatic Nymis link check below the
+  recipient field: a warning for strong/weak links with server evidence, a
+  subtle neutral line for `none` and for inconclusive/unavailable results, and a
+  standing disclosure with a Turn off action. It never gates the Review button.
+
 ## Hooks and effects
 
+- `hooks/useRecipientLinkage.ts` is the only egress of the recipient pair: it
+  waits for the preference to load, requires a valid resolved non-own recipient on
+  Ethereum/Base/Arbitrum, debounces 400 ms, aborts stale requests, serves a
+  5-minute in-memory cache, and pauses after 429/503. The setting lives in
+  `lib/recipientLinkagePreference.ts` (sync storage, default on).
 - `hooks/useSendRecipientSafety.ts` reads the trusted-UI local recipient
   projection, refreshes on contact/history events, discards stale reads, and
   resets acknowledgement synchronously on recipient, sender, chain, or reference
